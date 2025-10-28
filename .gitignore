@@ -1,21 +1,34 @@
-# Flutter/Dart/Pub related
+# Flutter/Dart/Pub
 .dart_tool/
 .packages
+.flutter-plugins
+.flutter-plugins-dependencies
 .pub-cache/
 .pub/
-
-# Build output
 build/
-android/app/build/
+coverage/
+
+# iOS
 ios/Pods/
+ios/.symlinks/
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/Flutter/Generated.xcconfig
+ios/Flutter/ephemeral/
+
+# Android
+/android/app/build/
+/android/.gradle/
+/android/.idea/
+/android/local.properties
+
+# Binary outputs
 *.apk
 *.aab
 
-# IDE / editor files
-.vscode/
-.idea/
-*.iml
-
-# Mac / Windows
+# Misc
+*.class
+*.log
+*.pyc
+*.swp
 .DS_Store
-Thumbs.db

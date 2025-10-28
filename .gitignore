@@ -1,0 +1,21 @@
+# Flutter/Dart/Pub related
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+
+# Build output
+build/
+android/app/build/
+ios/Pods/
+*.apk
+*.aab
+
+# IDE / editor files
+.vscode/
+.idea/
+*.iml
+
+# Mac / Windows
+.DS_Store
+Thumbs.db

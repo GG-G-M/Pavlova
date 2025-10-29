@@ -17,18 +17,33 @@ class AlignmentExamplesApp extends StatelessWidget {
 // List of all examples — first ROW then COLUMN
 final List<Map<String, dynamic>> examples = [
   // ROW – MainAxisAlignment
-  {"title": "Mantilla Main.center", "widget": "row", "main": MainAxisAlignment.center, "cross": null},
-  {"title": "Mantilla Main.spaceAround", "widget": "row", "main": MainAxisAlignment.spaceAround, "cross": null},
-  {"title": "Mantilla Main.spaceBetween", "widget": "row", "main": MainAxisAlignment.spaceBetween, "cross": null},
-  {"title": "Mantilla Main.spaceEvenly", "widget": "row", "main": MainAxisAlignment.spaceEvenly, "cross": null},
-  {"title": "Mantilla Main.start", "widget": "row", "main": MainAxisAlignment.start, "cross": null},
-  {"title": "Mantilla Main.end", "widget": "row", "main": MainAxisAlignment.end, "cross": null},
+  {"title": "Mantilla Row Main.center", "widget": "row", "main": MainAxisAlignment.center, "cross": null},
+  {"title": "Mantilla Row Main.spaceAround", "widget": "row", "main": MainAxisAlignment.spaceAround, "cross": null},
+  {"title": "Mantilla Row Main.spaceBetween", "widget": "row", "main": MainAxisAlignment.spaceBetween, "cross": null},
+  {"title": "Mantilla Row Main.spaceEvenly", "widget": "row", "main": MainAxisAlignment.spaceEvenly, "cross": null},
+  {"title": "Mantilla Row Main.start", "widget": "row", "main": MainAxisAlignment.start, "cross": null},
+  {"title": "Mantilla Row Main.end", "widget": "row", "main": MainAxisAlignment.end, "cross": null},
+
+  // ROW – CrossAxisAlignment
+  {"title": "Mantilla Row Cross.start", "widget": "row", "main": null, "cross": CrossAxisAlignment.start},
+  {"title": "Mantilla Row Cross.end", "widget": "row", "main": null, "cross": CrossAxisAlignment.end},
+  {"title": "Mantilla Row Cross.center", "widget": "row", "main": null, "cross": CrossAxisAlignment.center},
+  {"title": "Mantilla Row Cross.stretch", "widget": "row", "main": null, "cross": CrossAxisAlignment.stretch},
+
+  // COLUMN – MainAxisAlignment
+  
+  {"title": "Mantilla Column Main.spaceAround", "widget": "column", "main": MainAxisAlignment.spaceAround, "cross": null},
+  {"title": "Mantilla Column Main.spaceBetween", "widget": "column", "main": MainAxisAlignment.spaceBetween, "cross": null},
+  {"title": "Mantilla Column Main.spaceEvenly", "widget": "column", "main": MainAxisAlignment.spaceEvenly, "cross": null},
+  {"title": "Mantilla Column Main.start", "widget": "column", "main": MainAxisAlignment.start, "cross": null},
+  {"title": "Mantilla Column Main.end", "widget": "column", "main": MainAxisAlignment.end, "cross": null},
+  {"title": "Mantilla Column Main.center", "widget": "column", "main": MainAxisAlignment.center, "cross": null},
 
   // COLUMN – CrossAxisAlignment
-  {"title": "Mantilla Cross.start", "widget": "column", "main": null, "cross": CrossAxisAlignment.start},
-  {"title": "Mantilla Cross.end", "widget": "column", "main": null, "cross": CrossAxisAlignment.end},
-  {"title": "Mantilla Cross.center", "widget": "column", "main": null, "cross": CrossAxisAlignment.center},
-  {"title": "Mantilla Cross.stretch", "widget": "column", "main": null, "cross": CrossAxisAlignment.stretch},
+  {"title": "Mantilla Column Cross.start", "widget": "column", "main": null, "cross": CrossAxisAlignment.start},
+  {"title": "Mantilla Column Cross.end", "widget": "column", "main": null, "cross": CrossAxisAlignment.end},
+  {"title": "Mantilla Column Cross.center", "widget": "column", "main": null, "cross": CrossAxisAlignment.center},
+  {"title": "Mantilla Column Cross.stretch", "widget": "column", "main": null, "cross": CrossAxisAlignment.stretch},
 ];
 
 class ExamplePage extends StatelessWidget {
@@ -52,8 +67,8 @@ class ExamplePage extends StatelessWidget {
       ),
       body: Center(
         child: widgetType == "row"
-            ? buildRowExample(mainAlign)
-            : buildColumnExample(crossAlign),
+            ? buildRowExample(mainAlign, crossAlign)
+            : buildColumnExample(mainAlign, crossAlign),
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -86,10 +101,11 @@ class ExamplePage extends StatelessWidget {
     );
   }
 
-  // ------------------ ROW (MainAxisAlignment) ------------------
-  Widget buildRowExample(MainAxisAlignment alignmentType) {
+  // ------------------ ROW (MainAxisAlignment / CrossAxisAlignment) ------------------
+  Widget buildRowExample(MainAxisAlignment? mainAlign, CrossAxisAlignment? crossAlign) {
     return Row(
-      mainAxisAlignment: alignmentType,
+      mainAxisAlignment: mainAlign ?? MainAxisAlignment.center,
+      crossAxisAlignment: crossAlign ?? CrossAxisAlignment.center,
       children: [
         Container(width: 90, height: 90, color: Colors.red),
         Container(width: 80, height: 80, color: Colors.yellow),
@@ -98,20 +114,21 @@ class ExamplePage extends StatelessWidget {
     );
   }
 
-  // ------------------ COLUMN (CrossAxisAlignment) ------------------
-  Widget buildColumnExample(CrossAxisAlignment alignmentType) {
-    // Stretch alignment starts from top instead of center
-    final mainAxis = alignmentType == CrossAxisAlignment.stretch
-        ? MainAxisAlignment.start
-        : MainAxisAlignment.center;
+  // ------------------ COLUMN (MainAxisAlignment / CrossAxisAlignment) ------------------
+  Widget buildColumnExample(MainAxisAlignment? mainAlign, CrossAxisAlignment? crossAlign) {
+    final cross = crossAlign ?? CrossAxisAlignment.center;
+    final main = mainAlign ??
+        (crossAlign == CrossAxisAlignment.stretch
+            ? MainAxisAlignment.start
+            : MainAxisAlignment.center);
 
     return Column(
-      crossAxisAlignment: alignmentType,
-      mainAxisAlignment: mainAxis,
+      crossAxisAlignment: cross,
+      mainAxisAlignment: main,
       children: [
-        Container(width: 90, height: 40, color: Colors.red),
-        Container(width: 80, height: 60, color: Colors.yellow),
-        Container(width: 70, height: 80, color: Colors.blue),
+        Container(width: 90, height: 90, color: Colors.red),
+        Container(width: 80, height: 80, color: Colors.yellow),
+        Container(width: 70, height: 70, color: Colors.blue),
       ],
     );
   }

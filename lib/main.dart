@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pavlova/pavlova.dart';
 import 'package:pavlova/edgeInsets.dart';
+import 'package:pavlova/AlignmentExamplesApp.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +19,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       // home: Pavlova(),
-      home: edgeInsets(),
+      // home: edgeInsets(),
+      home: AlignmentExamplesApp(),
     );
   }
 }

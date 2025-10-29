@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const AlignmentExamplesApp());
-}
-
 class AlignmentExamplesApp extends StatelessWidget {
   const AlignmentExamplesApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'TASK 1 MANTILLA',
+      title: 'TASK 3 MANTILLA',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blue),
       home: const ExamplePage(index: 0),
